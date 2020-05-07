@@ -1,5 +1,13 @@
-import React, { useEffect, useCallback } from 'react';
-import { View, Text, StyleSheet, Image, Alert, StatusBar } from 'react-native';
+import React, { useEffect, useCallback, useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Alert,
+  StatusBar,
+  TextInput,
+} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWeatherHandler } from '../store/actions/homeActions';
 
@@ -13,6 +21,7 @@ const titleCase = str => {
 };
 
 const Home = props => {
+  const [city, setCity] = useState('');
   // const dispatch = useDispatch();
 
   // const loadWeather = useCallback(async () => {
@@ -59,12 +68,18 @@ const Home = props => {
             height: 55,
             width: 350,
             borderRadius: 30,
-            borderWidth: 0.4,
-            borderColor: '#c5cae9',
-            // borderColor: 'white',
-            // borderWidth: 0.5,
+            // borderWidth: 0.4,
+            // borderColor: '#7986cb',
           }}>
-          <Text
+          <TextInput
+            autoCapitalize="words"
+            placeholder="Search city..."
+            placeholderTextColor="#c5cae9"
+            style={styles.input}
+            value={city}
+            onChangeText={text => setCity(text)}
+          />
+          {/* <Text
             style={{
               color: 'white',
               fontWeight: '500',
@@ -72,7 +87,7 @@ const Home = props => {
               opacity: 0.7,
             }}>
             Search city...
-          </Text>
+          </Text> */}
         </NeuView>
       </View>
       <View
@@ -85,8 +100,8 @@ const Home = props => {
             height: 300,
             width: 350,
             borderRadius: 30,
-            borderWidth: 0.4,
-            borderColor: '#c5cae9',
+            // borderWidth: 0.4,
+            // borderColor: '#7986cb',
           }}>
           <View style={{ flex: 1, flexDirection: 'row' }}>
             <View
@@ -105,7 +120,7 @@ const Home = props => {
                 style={{
                   fontSize: 18,
                   fontWeight: '500',
-                  opacity: 0.7,
+                  opacity: 0.8,
                   color: 'white',
                 }}>
                 {titleCase(data.list[0].weather[0].description)}
@@ -135,7 +150,30 @@ const Home = props => {
           </View>
         </NeuView>
       </View>
-      <View>{/* <Text>Yesss</Text> */}</View>
+      <View style={styles.rowCards}>
+        <View style={styles.cardContainer}>
+          <NeuView style={styles.card}>
+            <Text>{data.list[0].wind.speed.toFixed(1)} km/h</Text>
+            <Text>Wind</Text>
+          </NeuView>
+        </View>
+        <View style={styles.cardContainer}>
+          <NeuView style={styles.card}>
+            <Text>{data.list[0].main.humidity} %</Text>
+            <Text>Humidity</Text>
+          </NeuView>
+        </View>
+        <View style={styles.cardContainer}>
+          <NeuView style={styles.card}>
+            <Text>{data.list[0].main.pressure} Pa</Text>
+            <Text>Pressure</Text>
+          </NeuView>
+        </View>
+      </View>
+      <View>
+        <Text>See Forecast</Text>
+        <Text>© cherucole 2020</Text>
+      </View>
     </View>
   );
 };
@@ -163,7 +201,29 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: 'white',
     opacity: 0.6,
-    marginLeft: 40,
+    // marginLeft: 40,
     marginVertical: 3,
+  },
+  input: {
+    height: '100%',
+    width: '60%',
+    fontSize: 20,
+    color: 'white',
+  },
+  rowCards: {
+    marginVertical: 40,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  cardContainer: {
+    height: 220,
+    width: '32%',
+  },
+  card: {
+    height: 220,
+    width: '100%',
+    borderRadius: 10,
+    // borderWidth: 0.4,
+    // borderColor: '#7986cb',
   },
 });
