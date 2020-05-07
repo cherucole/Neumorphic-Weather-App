@@ -4,9 +4,9 @@
 
 ### Tech Stack:
 
-_1._ React Native
-_2._ Redux
-_3._ Openweather API
+- React Native
+- Redux
+- Openweather API
 
 # App - Preview
 
