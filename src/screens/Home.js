@@ -153,26 +153,71 @@ const Home = props => {
       <View style={styles.rowCards}>
         <View style={styles.cardContainer}>
           <NeuView style={styles.card}>
-            <Text>{data.list[0].wind.speed.toFixed(1)} km/h</Text>
-            <Text>Wind</Text>
+            <Image
+              style={styles.cardImage}
+              source={require('../assets/UI/wind.png')}
+            />
+            <Text style={styles.weather}>
+              {data.list[0].wind.speed.toFixed(1)} km/h
+            </Text>
+            <Text style={styles.label}>Wind</Text>
           </NeuView>
         </View>
         <View style={styles.cardContainer}>
           <NeuView style={styles.card}>
-            <Text>{data.list[0].main.humidity} %</Text>
-            <Text>Humidity</Text>
+            <Image
+              style={styles.cardImage}
+              source={require('../assets/UI/humidity.png')}
+            />
+            <Text style={styles.weather}>{data.list[0].main.humidity} %</Text>
+            <Text style={styles.label}>Humidity</Text>
           </NeuView>
         </View>
         <View style={styles.cardContainer}>
           <NeuView style={styles.card}>
-            <Text>{data.list[0].main.pressure} Pa</Text>
-            <Text>Pressure</Text>
+            <Image
+              style={styles.cardImage}
+              source={require('../assets/UI/pressure.png')}
+            />
+            <Text style={styles.weather}>{data.list[0].main.pressure} Pa</Text>
+            <Text style={styles.label}>Pressure</Text>
           </NeuView>
         </View>
       </View>
       <View>
-        <Text>See Forecast</Text>
-        <Text>© cherucole 2020</Text>
+        <NeuView style={{ borderRadius: 20 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: '100%',
+              height: '100%',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text style={[styles.weather, { opacity: 0.8 }]}>See Forecast</Text>
+            <Image
+              style={{
+                height: '70%',
+                width: 35,
+                marginLeft: 20,
+                tintColor: 'white',
+                opacity: 0.7,
+              }}
+              source={require('../assets/UI/arrow.png')}
+            />
+          </View>
+        </NeuView>
+        <Text
+          style={{
+            alignSelf: 'center',
+            fontWeight: '600',
+            marginVertical: 15,
+            color: 'white',
+            opacity: 0.4,
+            fontSize: 16,
+          }}>
+          © cherucole 2020
+        </Text>
       </View>
     </View>
   );
@@ -225,5 +270,23 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     // borderWidth: 0.4,
     // borderColor: '#7986cb',
+    justifyContent: 'space-around',
+  },
+  cardImage: {
+    height: 45,
+    width: 45,
+    tintColor: 'white',
+    marginTop: 30,
+  },
+  label: {
+    fontSize: 20,
+    color: 'white',
+    // fontWeight: '500',
+    opacity: 0.7,
+  },
+  weather: {
+    fontWeight: '600',
+    color: 'white',
+    fontSize: 20,
   },
 });
