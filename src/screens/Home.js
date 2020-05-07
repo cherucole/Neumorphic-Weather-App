@@ -7,6 +7,7 @@ import {
   Alert,
   StatusBar,
   TextInput,
+  TouchableHighlight,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchWeatherHandler } from '../store/actions/homeActions';
@@ -71,23 +72,44 @@ const Home = props => {
             // borderWidth: 0.4,
             // borderColor: '#7986cb',
           }}>
-          <TextInput
-            autoCapitalize="words"
-            placeholder="Search city..."
-            placeholderTextColor="#c5cae9"
-            style={styles.input}
-            value={city}
-            onChangeText={text => setCity(text)}
-          />
-          {/* <Text
+          <View
             style={{
-              color: 'white',
-              fontWeight: '500',
-              fontSize: 19,
-              opacity: 0.7,
+              flexDirection: 'row',
+              height: '100%',
+              width: '100%',
+              justifyContent: 'flex-end',
             }}>
-            Search city...
-          </Text> */}
+            <View style={{ width: '55%' }}>
+              <TextInput
+                autoCapitalize="words"
+                placeholder="Search place..."
+                placeholderTextColor="#c5cae9"
+                style={styles.input}
+                value={city}
+                onChangeText={text => setCity(text)}
+              />
+            </View>
+            <TouchableHighlight
+              style={{
+                // backgroundColor: 'red',
+                height: '100%',
+                width: 65,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderLeftColor: 'white',
+                borderLeftWidth: 0.5,
+              }}>
+              <Image
+                style={{
+                  height: 25,
+                  width: 25,
+                  tintColor: 'white',
+                  opacity: 0.7,
+                }}
+                source={require('../assets/UI/search2.png')}
+              />
+            </TouchableHighlight>
+          </View>
         </NeuView>
       </View>
       <View
@@ -251,7 +273,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: '100%',
-    width: '60%',
+    width: '100%',
     fontSize: 20,
     color: 'white',
   },
