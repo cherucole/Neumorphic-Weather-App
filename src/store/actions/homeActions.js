@@ -16,9 +16,8 @@ export const fetchWeatherFailure = error => ({
   payload: error,
 });
 
-export const fetchWeatherHandler = () => {
-  let url =
-    'http://api.openweathermap.org/data/2.5/find?q=London,uk&units=metric&appid=271d1234d3f497eed5b1d80a07b3fcd1';
+export const fetchWeatherHandler = location => {
+  let url = `http://api.openweathermap.org/data/2.5/find?q=${location}&units=metric&appid=271d1234d3f497eed5b1d80a07b3fcd1`;
   return async dispatch => {
     dispatch(fetchWeatherRequest());
     try {
